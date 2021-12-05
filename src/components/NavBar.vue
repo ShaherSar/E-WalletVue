@@ -4,10 +4,11 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="isLoggedIn">
-        <b-nav-item><router-link to="/admin" exact>Dashboard</router-link></b-nav-item>
-        <b-nav-item><router-link to="/admin/payment-methods" exact>PaymentMethods</router-link></b-nav-item>
-        <b-nav-item><router-link to="/admin/users" exact>Users</router-link></b-nav-item>
-        <b-nav-item><router-link to="/admin/transactions" exact>Transactions</router-link></b-nav-item>
+        <b-nav-item v-if="!isAdmin"><router-link to="/" exact>Transactions</router-link></b-nav-item>
+        <b-nav-item v-if="isAdmin"><router-link to="/admin" exact>Dashboard</router-link></b-nav-item>
+        <b-nav-item v-if="isAdmin"><router-link to="/admin/payment-methods" exact>PaymentMethods</router-link></b-nav-item>
+        <b-nav-item v-if="isAdmin"><router-link to="/admin/users" exact>Users</router-link></b-nav-item>
+        <b-nav-item v-if="isAdmin"><router-link to="/admin/transactions" exact>Transactions</router-link></b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav v-if="!isLoggedIn">
         <b-nav-item><router-link to="/login" exact>Login</router-link></b-nav-item>

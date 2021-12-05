@@ -75,6 +75,7 @@ export default {
     async submit() {
       try {
         await this.LogIn(this.form);
+        //this.$router.push('/')
         this.showError = false
       } catch (error) {
         this.showError = true
