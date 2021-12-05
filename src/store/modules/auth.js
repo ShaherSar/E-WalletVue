@@ -6,7 +6,11 @@ const state = {
     currencies:null,
     users:null,
     transactions:null,
-    errors:null
+    errors:null,
+    dataset:{
+        labels:[],
+        data:[]
+    }
 };
 const getters = {
     isAuthenticated: state => !!state.token,
@@ -17,8 +21,17 @@ const getters = {
     getAllTransactionForAdmin:state =>state.transactions,
     getCurrencies:state => state.currencies,
     getPaymentMethods:state => state.paymentMethods,
+    getDataSet:state => state.dataset
 };
 const actions = {
+    async GetChartDataSet({ state,commit }){
+        let response = (await axios.get('transactions/chart',{
+            headers: {
+                'Authorization': "Bearer "+ state.token,
+            }
+        }))
+        commit('setDataSet', response.data)
+    },
     async UpdateUserStatus({dispatch,state},form){
         let response = await axios.post('users/update', form,{
             headers: {
@@ -67,6 +80,7 @@ const actions = {
         commit('setTransactions',null)
         commit('setUsersForAdmin',null)
         commit('setCurrencies',null)
+        commit('setDataSet',null)
     },
     async LogInAction({dispatch,commit}, User) {
         let response =  await axios.post('login', User)
@@ -108,13 +122,6 @@ const actions = {
         //await dispatch('UpdateUserInfo')
     },
     async CreateTransaction({state,dispatch}, form) {
-        /*
-        let PForm = new FormData()
-        PForm.append('payment_method_id',form.payment_method_id)
-        PForm.append('amount', form.amount)
-        PForm.append('currency_id', form.currency_id)
-        PForm.append('type',form.type)
-         */
         await axios.post('transactions/store', form,{
             headers: {
                 'Authorization': "Bearer "+ state.token,
@@ -167,6 +174,9 @@ const mutations = {
     },
     setUsersForAdmin(state,users){
         state.users = users
+    },
+    setDataSet(state,dataset){
+        state.dataset = dataset
     }
 };
 export default {
