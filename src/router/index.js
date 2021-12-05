@@ -8,9 +8,15 @@ import Admin from '../views/admin/Admin.vue'
 import AdminTransactions from '../views/admin/AdminTransactions.vue'
 import AdminPaymentMethods from '../views/admin/AdminPaymentMethods.vue'
 import AdminUsers from '../views/admin/AdminUsers.vue'
+import Page404 from '../views/Page404.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'*',
+    name:'page404',
+    component: Page404
+  },
   {
     path: '/',
     name: 'Home',
