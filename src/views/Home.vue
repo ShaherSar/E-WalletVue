@@ -1,6 +1,6 @@
 <template>
-<div v-if="isAuthenticated">
-  <b-row>
+<div>
+  <b-row v-if="isAuthenticated">
     <b-col md="6" class="mt-3">
       <b-card>
         <b-card-header><h3 class="text-center">Add Transaction</h3></b-card-header>
@@ -45,8 +45,8 @@
         </b-card-body>
       </b-card>
     </b-col>
-  </b-row>
-  <b-row class="mt-3">
+  </b-row >
+  <b-row class="mt-3" v-if="isAuthenticated">
     <b-col>
       <b-card>
         <b-card-header>
@@ -75,6 +75,11 @@
           </b-table-simple>
         </b-card-body>
       </b-card>
+    </b-col>
+  </b-row>
+  <b-row v-if="!isAuthenticated" class="mt-3">
+    <b-col>
+      <b-alert variant="danger" show><h3>You are not logged in</h3></b-alert>
     </b-col>
   </b-row>
 </div>
