@@ -7,10 +7,7 @@ const state = {
     users:null,
     transactions:null,
     errors:null,
-    dataset:{
-        labels:[],
-        data:[]
-    }
+    dataset:null,
 };
 const getters = {
     isAuthenticated: state => !!state.token,

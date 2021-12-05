@@ -68,7 +68,7 @@
                     id="input-1"
                     v-model="form.maximum_withdrawal"
                     type="text"
-                    placeholder="Minimum Withdrawal"
+                    placeholder="Maximum Withdrawal"
                     required
                 ></b-form-input>
               </b-form-group>
@@ -79,9 +79,10 @@
               </b-form-select>
               <b-button type="submit" variant="primary" block>Submit</b-button>
             </b-form>
+            <!--
             <b-card class="mt-3" header="Form Data Result">
               <pre class="m-0">{{ form }}</pre>
-            </b-card>
+            </b-card>-->
           </b-card-body>
         </b-card>
       </b-col>

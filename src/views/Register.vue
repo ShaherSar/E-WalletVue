@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="!isAuthenticated">
     <b-col md="6" class="mx-auto mt-3">
       <b-card>
         <b-card-header><h3 class="text-center">Register</h3></b-card-header>
@@ -44,10 +44,12 @@
 
             <b-button type="submit" variant="primary" block>Register</b-button>
           </b-form>
+          <!--
           <b-card class="mt-3" header="Form Data Result">
             <pre class="m-0">{{ form }}</pre>
           </b-card>
           <p v-if="showError" id="error">Username already exists</p>
+          -->
         </b-card-body>
       </b-card>
     </b-col>
@@ -57,7 +59,12 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  name: 'Home',
+  name: 'Register',
+  computed:{
+    isAuthenticated:function (){
+      return this.$store.getters.isAuthenticated
+    }
+  },
   data() {
     return {
       form: {

@@ -21,8 +21,7 @@ export default {
     }
   },
   mounted () {
-    this.fillData()
-    this.GetChartDataSet()
+    this.GetDataSet()
   },
   computed:{
     dataset:function(){
@@ -32,10 +31,10 @@ export default {
   methods: {
     fillData () {
       this.datacollection = {
-        labels: this.dataset.labels, //Dates X
+        labels: this.dataset.labels,
         datasets: [
             {
-            label: 'Deposit Count',
+            label: 'Transactions Count By Date',
             data: this.dataset.data
           },
         ]
@@ -44,6 +43,7 @@ export default {
     ...mapActions(['GetChartDataSet']),
     async GetDataSet(){
       await this.GetChartDataSet()
+      await this.fillData()
     }
   }
 }

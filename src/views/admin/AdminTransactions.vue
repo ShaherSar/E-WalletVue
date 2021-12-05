@@ -20,7 +20,7 @@
               <b-td>{{ el.type }}</b-td>
               <b-td>{{el.amount}}</b-td>
               <b-td>{{ el.status }}</b-td>
-              <b-td><b-btn @click="ButtonClick(el.id,'Approved')">Approve</b-btn> <b-btn @click="ButtonClick(el.id,'Rejected')">Reject</b-btn> </b-td>
+              <b-td><b-btn @click="ButtonClick(el.id,'Approved')" v-if="el.status != 'Approved'">Approve</b-btn> <b-btn @click="ButtonClick(el.id,'Rejected')" v-if="el.status == 'Pending'">Reject</b-btn> </b-td>
             </b-tr>
           </b-tbody>
         </b-table-simple>

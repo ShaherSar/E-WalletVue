@@ -1,22 +1,22 @@
 <template>
-<div>
+<div v-if="isAuthenticated">
   <b-row>
     <b-col md="6" class="mt-3">
       <b-card>
         <b-card-header><h3 class="text-center">Add Transaction</h3></b-card-header>
         <b-card-body>
           <b-form @submit.prevent="submit">
-            <b-form-select v-model="form.payment_method_id" :options="PaymentMethods" text-field="name" value-field="id" class="mb-3" @change="onChangeMethod($event)">
+            <b-form-select v-model="form.payment_method_id" :options="PaymentMethods" text-field="name" value-field="id" class="mb-3" @change="onChangeMethod($event)" required>
               <template #first>
                 <b-form-select-option :value="null" disabled>-- Payment Method --</b-form-select-option>
               </template>
             </b-form-select>
-            <b-form-select v-model="form.currency_id" class="mb-3" :options="currencies_to_show" text-field="name" value-field="id">
+            <b-form-select v-model="form.currency_id" class="mb-3" :options="currencies_to_show" text-field="name" value-field="id" required>
               <template #first>
                 <b-form-select-option :value="null" disabled>-- Currency --</b-form-select-option>
               </template>
             </b-form-select>
-            <b-form-select v-model="form.type" class="mb-3">
+            <b-form-select v-model="form.type" class="mb-3" required>
               <template #first>
                 <b-form-select-option :value="null" disabled>-- Action --</b-form-select-option>
               </template>
@@ -36,10 +36,12 @@
             </b-form-group>
             <b-button type="submit" variant="primary" block>Request</b-button>
           </b-form>
+          <!--
           <b-card class="mt-3" header="Form Data Result">
             <pre class="m-0">{{ form }}</pre>
             <pre class="m-0">{{ currencies_to_show }}</pre>
           </b-card>
+          -->
         </b-card-body>
       </b-card>
     </b-col>
@@ -66,7 +68,7 @@
                 <b-td>{{el.created_at}}</b-td>
                 <b-td>{{ el.type }}</b-td>
                 <b-td>{{ el.status }}</b-td>
-                <b-td>{{ el.type }}</b-td>
+                <b-td>{{ el.currency.name }}</b-td>
                 <b-td>{{ el.amount }}</b-td>
               </b-tr>
             </b-tbody>
@@ -85,6 +87,9 @@ import {mapActions} from "vuex";
 export default {
   name: 'Home',
   computed:{
+    isAuthenticated:function (){
+      return this.$store.getters.isAuthenticated
+    },
     UserData:function (){
       return this.$store.getters.getUser;
     },

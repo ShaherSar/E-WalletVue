@@ -6,7 +6,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="isLoggedIn && isAdmin">
-        <b-nav-item href="/admin" >Admin</b-nav-item>
+        <b-nav-item href="/admin" >Chart</b-nav-item>
         <b-nav-item href="/admin/payment-methods" >PaymentMethods</b-nav-item>
         <b-nav-item href="/admin/users" >Users</b-nav-item>
         <b-nav-item href="/admin/transactions" >Transactions</b-nav-item>

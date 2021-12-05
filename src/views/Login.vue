@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="!isAuthenticated">
     <b-col md="6" class="mx-auto mt-3">
       <b-card>
         <b-card-header><h3 class="text-center">Login</h3></b-card-header>
@@ -31,9 +31,11 @@
 
             <b-button type="submit" variant="primary" block>Login</b-button>
           </b-form>
+          <!--
           <b-card class="mt-3" header="Form Data Result">
             <pre class="m-0">{{ form }}</pre>
           </b-card>
+          -->
         </b-card-body>
       </b-card>
     </b-col>
@@ -44,7 +46,12 @@
 import {mapActions} from "vuex";
 
 export default {
-  name: 'Home',
+  name: 'Login',
+  computed:{
+    isAuthenticated:function (){
+      return this.$store.getters.isAuthenticated
+    }
+  },
   data() {
     return {
       form: {
